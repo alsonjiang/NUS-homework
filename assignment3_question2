@@ -1,0 +1,31 @@
+import timeit
+
+#binomial without recursion
+def get_factorial(num):
+    factorial = 1
+    for i in range(1,num+1):
+        factorial = factorial * i
+    return factorial
+
+def binom_coeff(n,k):
+    start_time = timeit.timeit()
+    coefficient = get_factorial(n) // (get_factorial(k) * get_factorial(n-k))
+    end_time = timeit.timeit()
+    print(end_time - start_time)
+    return coefficient
+
+#print(binom_coeff(10,2))
+
+
+#binomial with recursion
+#n Choose k = (n-1 Choose k-1) + (n-1 Choose k)
+def binom_coeff_recur(n,k):
+    if (n == k) or (k == 0):
+        return 1
+    else:
+        return binom_coeff_recur(n - 1, k - 1) + binom_coeff_recur(n - 1, k)
+
+start_time = timeit.timeit()
+print(binom_coeff_recur(100,5))
+end_time = timeit.timeit()
+print(end_time - start_time)

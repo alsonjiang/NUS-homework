@@ -3,10 +3,10 @@ def find_winners(factor_digit,must_have_digit,n):
     multiple = 1
     winners = []
 
-    while potential_winner < n:
+    while potential_winner <= n:
         potential_winner = factor_digit * multiple 
         multiple += 1
-        if str(must_have_digit) in str(potential_winner) and potential_winner < n:
+        if str(must_have_digit) in str(potential_winner) and potential_winner <= n:
             winners.append(potential_winner)
         else:
             continue

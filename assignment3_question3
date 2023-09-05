@@ -1,0 +1,5 @@
+import random #don't import in coursemo
+
+def monte_carlo_pi(n):
+    #let the radius of circle = 1
+    area_circle = 
