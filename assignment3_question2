@@ -1,5 +1,5 @@
-import sys
 import time
+import sys
 sys.setrecursionlimit(10**6)
 
 #binomial without recursion
@@ -21,7 +21,6 @@ elapsed = end_time - start_time
 print("completed in " + str(elapsed) + " seconds")
 """
 
-
 #binomial with recursion
 #n Choose k = (n-1 Choose k-1) + (n-1 Choose k)
 def binom_coeff_recur(n,k):
@@ -38,7 +37,6 @@ elapsed = end_time - start_time
 print("completed in " + str(elapsed) + " seconds")
 """
 
-
 #memoisation
 def binom_coeff_memo(n, k, memo={}):
     if (n,k) in memo:
@@ -53,7 +51,7 @@ def binom_coeff_memo(n, k, memo={}):
     return result
 
 start_time = time.perf_counter()
-binom_coeff_memo(350000,90)
+binom_coeff_memo(20000,10000)
 end_time = time.perf_counter()
 elapsed = end_time - start_time
 print("completed in " + str(elapsed) + " seconds")
