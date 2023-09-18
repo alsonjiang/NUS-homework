@@ -1,0 +1,38 @@
+from random import shuffle
+
+
+longList = [i for i in range(1, 100000)]
+shuffle(longList)
+print
+
+
+#able to deal with duplicate resistors in the ORIGINAL tuple input
+def matchResistors(R: tuple, n: int) -> list:
+
+    #list to store all resistor pairs (even same but swap order)
+    pairs = []
+
+    #list to store resistor pairs after removing duplicates
+    final_pairs = []
+
+    #create a new list to find the resistor pair for desired resistance
+    corresponding_resistor = [n - value for item, value in enumerate(R)]
+
+    #check if resistor pair exists in the original tuple, and not itself
+    for item, value in enumerate(corresponding_resistor):
+        if value in R and item != R.index(value):
+            pairs.append((value, R[item]))
+
+    #remove duplicates by checking if reversed pair already exists
+    for pair in pairs:
+        if pair and tuple(reversed(pair)) not in final_pairs:
+            final_pairs.append(pair)
+
+    return final_pairs
+
+resistorsList = (75,80,90,77,88,91,60,74,73,70,55,93,59)
+resistorsListDuplicates = (10,12,40,12,10)
+#print(matchResistors(resistorsList, 150))
+print(matchResistors(resistorsListDuplicates, 22))
+
+

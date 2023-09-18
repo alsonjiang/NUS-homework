@@ -9,11 +9,13 @@ def calc_poly(const_seq: list or tuple, var_poly: int or float) -> int or float:
     #result of all calculations, an integer
     result = 0
 
+    #calculate result, using index of list as powers of polynomial
     for item, value in enumerate(new_seq):
         value = value * (var_poly ** item)
         #new_seq[item] = value
         result += value
 
+    #check for float, return result
     if type(result) is float:
         return round(result, 2)
     
