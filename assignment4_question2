@@ -1,5 +1,6 @@
 from random import shuffle
 
+
 def matchResistors(R: tuple, n: int) -> list:
     result = []
 
@@ -11,10 +12,13 @@ def matchResistors(R: tuple, n: int) -> list:
     pairs = {value: R[item] for item, value in enumerate(corresponding_resistor) if value in R and item != R.index(value)}
 
     #remove "duplicates" by checking every key's value and key:value pair
-    for key in pairs:
-        if key not in result and result(pairs.values()).count(pairs.values()) == 1:
-                result.append((key, pairs.get(key)))
+    for key, value in pairs.items():
+        pair = (key, value)
+        pair_reversed = (value, key)
 
+        if pair not in result and pair_reversed not in result:
+            result.append(pair)
+    
     return result
 
 #able to deal with duplicate resistors in the ORIGINAL tuple input
@@ -46,14 +50,16 @@ def matchResistorsBasic(R: tuple, n: int) -> list:
     return final_pairs
 
 """
+#test extremely long input
 longList = [i for i in range(1, 100000)]
 shuffle(longList)
 print(len(matchResistors(longList,100000)))
 """
 
+#regular test + duplicate list test
 resistorsList = (75,80,90,77,88,91,60,74,73,70,55,93,59)
 resistorsListDuplicates = (10,12,40,12,10)
-print(matchResistors(resistorsList, 150))
+#print(matchResistors(resistorsList, 150))
 print(matchResistors(resistorsListDuplicates, 22))
 
 
