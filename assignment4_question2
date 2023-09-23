@@ -1,12 +1,56 @@
 from random import shuffle
 
 
+def binary_search(sorted_lst: list, target: int, itself: int) -> int:
+    #itself parameter ensures it does not select itself in the input list
+    low, high = 0, len(sorted_lst) - 1
+    while low <= high:
+        middle = (low + high) // 2
+        if middle == itself: 
+            break
+        else:
+            if sorted_lst[middle] == target: #target found
+                return middle
+            elif sorted_lst[middle] > target: #target is in left half
+                high = middle - 1
+            elif sorted_lst[middle] < target: #target is in the right half
+                low = middle + 1
+    return "not found" 
+    #using a string as a false condition as false == 0
+    #list[0] still has a value and it will create wrong matches
+
+def matchResistors(R: tuple, n: int) -> list:
+
+    result = []
+    
+    #create a sorted list from unsorted tuple input
+    lst_R = sorted(list(R))
+    print(lst_R)
+
+    #find corresponding resistor pair for every resistor
+    corresponding_resistor = [n - value for value in lst_R]
+
+    #search for matches, save to result
+    for item, value in enumerate(corresponding_resistor):
+        if value > 0: #ignore -ve values in corresponding_resistor
+            match = binary_search(lst_R, value, item) #search for a match in the original list
+            if match != "not found": 
+                pair = lst_R[match]
+                if lst_R[item] != -1: #check if itself is not already used in anothe pair
+                    result.append((pair, lst_R[item])) 
+                    lst_R[match] = -1 #replace found value with -1. Did not remove value to maintain indexing
+
+    return result
+
+
+#i just realised this does not work for duplicates because the first dict this creates (corr_resistor) 
+#cannot save another resistor with the same value as all key in dict must be unique
+"""
 def matchResistors(R: tuple, n: int) -> list:
     result = []
 
     #create a dictionary to find the resistor pair for desired resistance
-    #dictionary lookup time is constant to handle a large number of inputs
-    corresponding_resistor = {n - value: item for item, value in enumerate(R)}
+    corresponding_resistor = {n - value: value for item, value in enumerate(R)}
 
     #check if resistor pair exists in the original tuple, and not itself, using dict comprehension. Adds to a dict
     pairs = {value: R[item] for item, value in enumerate(corresponding_resistor) if value in R and item != R.index(value)}
@@ -19,7 +63,8 @@ def matchResistors(R: tuple, n: int) -> list:
         if pair not in result and pair_reversed not in result:
             result.append(pair)
     
-    return result
+    return corresponding_resistor
+"""
 
 #able to deal with duplicate resistors in the ORIGINAL tuple input
 def matchResistorsBasic(R: tuple, n: int) -> list:
@@ -57,9 +102,10 @@ print(len(matchResistors(longList,100000)))
 """
 
 #regular test + duplicate list test
-resistorsList = (75,80,90,77,88,91,60,74,73,70,55,93,59)
+#resistorsList = (75,80,90,77,88,91,60,74,73,70,55,93,59)
+resistorsList = ()
 resistorsListDuplicates = (10,12,40,12,10)
-#print(matchResistors(resistorsList, 150))
-print(matchResistors(resistorsListDuplicates, 22))
 
+print(matchResistors(resistorsList, 150)) #expected: 
+#print(matchResistors(resistorsListDuplicates, 22)) #expected: [(12, 10), (12, 10)]
 
