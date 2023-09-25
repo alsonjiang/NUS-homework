@@ -1,4 +1,5 @@
 from random import shuffle
+from collections import Counter
 
 
 def binary_search(sorted_lst: list, target: int, itself: int) -> int:
@@ -21,10 +22,14 @@ def binary_search(sorted_lst: list, target: int, itself: int) -> int:
 
 def matchResistors(R: tuple, n: int) -> list:
 
+    seen = []
     result = []
     
     #create a sorted list from unsorted tuple input
     lst_R = sorted(list(R))
+
+    #count the number of each resistor
+    resistor_counts = Counter(lst_R)
 
     #find corresponding resistor pair for every resistor
     corresponding_resistor = [n - value for value in lst_R]
@@ -32,23 +37,28 @@ def matchResistors(R: tuple, n: int) -> list:
     #search for matches, save to result
     for item, value in enumerate(corresponding_resistor):
         if value > 0: #ignore -ve values in corresponding_resistor
-            match = binary_search(lst_R, value, item) #search for a match in the original list
-            if match != "not found": 
-                pair = lst_R[match]
-                if lst_R[item] != -1: #check if itself is not already used in anothe pair
-                    result.append((pair, lst_R[item])) 
-                    lst_R[match] = -1 #replace found value with -1. Did not remove value to maintain indexing
+            match = binary_search(lst_R, value, item) #search for a match in the original list, match is the index of the pair
+            if match != "not found": #if index of the pair exists
+                pair = lst_R[match] #pair == value of match index
+                
+                #minus 1 for the matched pair and original resistor
+                resistor_counts[pair] -= 1
+                resistor_counts[lst_R[item]] -= 1
 
+                if resistor_counts[pair] >= 0 and resistor_counts[lst_R[item]] >= 0: 
+                    result.append((pair, lst_R[item])) 
+    
     return result
 
 #test extremely long input
-longList = [i for i in range(1, 100000)]
+longList = [i for i in range(1, 1000000)]
 shuffle(longList)
-print(len(matchResistors(longList,100000)))
+print(len(matchResistors(longList,10000)))
+#print(matchResistors(longList,10000))
 
 #regular test + duplicate list test
-#resistorsList = (75,80,90,77,88,91,60,74,73,70,55,93,59)
-resistorsList = ()
+resistorsList = (75,80,90,77,88,91,60,74,73,70,55,93,59)
+#resistorsList = ()
 resistorsListDuplicates = (10,12,40,12,10)
 
 #print(matchResistors(resistorsList, 150)) #expected: 
