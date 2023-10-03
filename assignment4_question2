@@ -24,6 +24,7 @@ def binary_search(sorted_lst: list, target: int, itself: int) -> int:
 '''
 def matchResistors(R: tuple, n: int) -> list:
 
+    seen = []
     result = []
 
     if R == ():
@@ -38,12 +39,19 @@ def matchResistors(R: tuple, n: int) -> list:
     #count the number of each resistor
     resistor_counts = Counter(lst_R)
 
+    #count the number of each resistor
+    resistor_counts = Counter(lst_R)
+
     #find corresponding resistor pair for every resistor
     corresponding_resistor = [(n - value) for value in lst_R if (n - value) > 0]
 
     #search for matches, save to result
     for item, value in enumerate(corresponding_resistor):
+<<<<<<< HEAD
         if value <= max_val:
+=======
+        if value > 0: #ignore -ve values in corresponding_resistor
+>>>>>>> 90015432384ca9eaf5378789ec05e1c0ed750869
             match = binary_search(lst_R, value, item) #search for a match in the original list, match is the index of the pair
             if match != "not found": #if index of the pair exists
                 pair = lst_R[match] #pair == value of match index
@@ -51,13 +59,20 @@ def matchResistors(R: tuple, n: int) -> list:
                 #minus 1 for the matched pair and original resistor
                 resistor_counts[pair] -= 1
                 resistor_counts[lst_R[item]] -= 1
+<<<<<<< HEAD
 
                 if resistor_counts[pair] >= 0 and resistor_counts[lst_R[item]] >= 0: 
                     result.append((pair, lst_R[item])) 
+=======
+>>>>>>> 90015432384ca9eaf5378789ec05e1c0ed750869
 
+                if resistor_counts[pair] >= 0 and resistor_counts[lst_R[item]] >= 0: 
+                    result.append((pair, lst_R[item])) 
+    
     return result
 '''
 
+<<<<<<< HEAD
 def matchResistors(R: tuple, n: int) -> tuple:
 
     result = []
@@ -93,4 +108,19 @@ shuffle(longList)
 #print(len(matchResistors(longList,10000)))
 print(matchResistors((75,80,90,77,88,91,60,74,73,70,55,93,59),150))
 
+=======
+#test extremely long input
+longList = [i for i in range(1, 1000000)]
+shuffle(longList)
+print(len(matchResistors(longList,10000)))
+#print(matchResistors(longList,10000))
+
+#regular test + duplicate list test
+resistorsList = (75,80,90,77,88,91,60,74,73,70,55,93,59)
+#resistorsList = ()
+resistorsListDuplicates = (10,12,40,12,10)
+
+#print(matchResistors(resistorsList, 150)) #expected: 
+#print(matchResistors(resistorsListDuplicates, 22)) #expected: [(12, 10), (12, 10)]
+>>>>>>> 90015432384ca9eaf5378789ec05e1c0ed750869
 
