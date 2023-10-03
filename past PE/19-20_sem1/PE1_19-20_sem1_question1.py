@@ -44,9 +44,12 @@ def is_happy_number(n: int, seen = []) -> bool:
 #print(is_happy_number(849))
 
 def all_happy_numbers(n: int, m: int) -> list:
-    lst = [1,3,4,5, 2]
+    lst = []
+
+    for number in range(n, m + 1):
+        if is_happy_number(number) == True:
+            lst.append(number)      
 
     return sorted(lst)
-
 
 print(all_happy_numbers(1, 70))
