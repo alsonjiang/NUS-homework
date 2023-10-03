@@ -1,0 +1,33 @@
+#iterative
+def dna_transcription_I(dna: str) -> str:
+    rna = ''
+    pairs = {
+        "A": "U",
+        "G": "C",
+        "T": "A",
+        "C": "G"
+    }
+    for character in dna:
+        rna += pairs[character]
+
+    return rna
+
+#print(dna_transcription_I('AGCTGACGTA'))
+
+#recursive
+def dna_transcription_R(dna: str) -> str:
+    rna = ''
+    pairs = {
+        "A": "U",
+        "G": "C",
+        "T": "A",
+        "C": "G"
+    }
+
+    if dna == '':
+        return ''
+    else:
+        return 
+
+
+    
