@@ -1,6 +1,7 @@
 from random import shuffle
+from collections import Counter
 
-
+'''
 def binary_search(sorted_lst: list, target: int, itself: int) -> int:
     #itself parameter ensures it does not select itself in the input list
     low, high = 0, len(sorted_lst) - 1
@@ -18,39 +19,78 @@ def binary_search(sorted_lst: list, target: int, itself: int) -> int:
     return "not found" 
     #using a string as a false condition as false == 0
     #list[0] still has a value and it will create wrong matches
+'''
 
+'''
 def matchResistors(R: tuple, n: int) -> list:
 
     result = []
-    
-    #create a sorted list from unsorted tuple input
-    lst_R = sorted(list(R))
+
+    if R == ():
+        return []
+    else:
+        #create a sorted list from unsorted tuple input
+        lst_R = sorted(list(R))
+
+    #the max resistor value
+    max_val = max(lst_R)
+
+    #count the number of each resistor
+    resistor_counts = Counter(lst_R)
 
     #find corresponding resistor pair for every resistor
-    corresponding_resistor = [n - value for value in lst_R]
+    corresponding_resistor = [(n - value) for value in lst_R if (n - value) > 0]
 
     #search for matches, save to result
     for item, value in enumerate(corresponding_resistor):
-        if value > 0: #ignore -ve values in corresponding_resistor
-            match = binary_search(lst_R, value, item) #search for a match in the original list
-            if match != "not found": 
-                pair = lst_R[match]
-                if lst_R[item] != -1: #check if itself is not already used in anothe pair
+        if value <= max_val:
+            match = binary_search(lst_R, value, item) #search for a match in the original list, match is the index of the pair
+            if match != "not found": #if index of the pair exists
+                pair = lst_R[match] #pair == value of match index
+                
+                #minus 1 for the matched pair and original resistor
+                resistor_counts[pair] -= 1
+                resistor_counts[lst_R[item]] -= 1
+
+                if resistor_counts[pair] >= 0 and resistor_counts[lst_R[item]] >= 0: 
                     result.append((pair, lst_R[item])) 
-                    lst_R[match] = -1 #replace found value with -1. Did not remove value to maintain indexing
 
     return result
+'''
 
-#test extremely long input
-longList = [i for i in range(1, 100000)]
+def matchResistors(R: tuple, n: int) -> tuple:
+
+    result = []
+
+    if R == () or R == []:
+        return []
+    else:
+        lst_R = sorted(list(R))
+
+    left, right = 0, len(lst_R) - 1
+
+    while left < right and left <= len(lst_R) - 1 and right >= 0:
+        left_value = lst_R[left]
+        right_value = lst_R[right]
+
+        if left_value + right_value == n:
+            result.append((left_value, right_value))
+            left += 1
+            right -= 1
+        
+        elif left_value + right_value < n:
+            left += 1
+
+        else:
+            right -= 1
+    
+    return result
+
+
+#longList = ()
+longList = [i for i in range(1, 1000000)]
 shuffle(longList)
-print(len(matchResistors(longList,100000)))
+#print(len(matchResistors(longList,10000)))
+print(matchResistors((75,80,90,77,88,91,60,74,73,70,55,93,59),150))
 
-#regular test + duplicate list test
-#resistorsList = (75,80,90,77,88,91,60,74,73,70,55,93,59)
-resistorsList = ()
-resistorsListDuplicates = (10,12,40,12,10)
-
-#print(matchResistors(resistorsList, 150)) #expected: 
-#print(matchResistors(resistorsListDuplicates, 22)) #expected: [(12, 10), (12, 10)]
 
