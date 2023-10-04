@@ -28,28 +28,33 @@ def sum_digit_square_R(n: int) -> int:
 
 #print(sum_digit_square_R(987654321))
 
-def is_happy_number(n: int, seen = []) -> bool:
+def is_happy_number(n: int) -> bool:
+    seen = {}
+
     sum = sum_digit_square_I(n)
 
-    if sum == 1:
-        return True
+    #mark result and itself as seen
+    seen[sum] = 1
+    seen[n] = 1
 
-    if sum in seen:
-        return False
+    while sum != 1 or sum != 7:
+        if seen[sum] == 1: #if number is seen before
+            return False #not happy number
+        else:
+            seen[sum] = 1 #add number to seen dict
+            sum = sum_digit_square_I(sum) #re-run SDS with the new number
 
-    else:
-        return is_happy_number(sum, seen.append(sum))
+    return True
 
-
-#print(is_happy_number(849))
+print(is_happy_number(7))
 
 def all_happy_numbers(n: int, m: int) -> list:
     lst = []
 
-    for number in range(n, m + 1):
+    for number in range(min(n, m), max(n, m)):
         if is_happy_number(number) == True:
             lst.append(number)      
 
     return sorted(lst)
 
-print(all_happy_numbers(1, 70))
+#print(all_happy_numbers(1, 70))

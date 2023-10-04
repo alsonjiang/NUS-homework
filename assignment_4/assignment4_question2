@@ -77,8 +77,7 @@ def matchResistors(R: tuple, n: int) -> tuple:
     left, right = 0, len(lst_R) - 1
 
     while left < right and left <= len(lst_R) - 1 and right >= 0:
-        left_value = lst_R[left]
-        right_value = lst_R[right]
+        left_value, right_value = lst_R[left], lst_R[right]
 
         if left_value + right_value == n:
             result.append((left_value, right_value))
