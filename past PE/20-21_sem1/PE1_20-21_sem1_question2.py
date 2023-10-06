@@ -60,6 +60,7 @@ def decode(msg, offset):
 
 #Write a function decode_with_love(msg) that will decode the message msg (str) 
 #without knowing the offset and return the decoded message with the word "LOVE" in it.
+
 def decode_with_love(msg):
 
     codes = {
@@ -132,5 +133,8 @@ def decode_with_love(msg):
         decoded_msg += codes.get(str(item))
 
     return decoded_msg
+
+def decode_with_love(msg: str) -> :
+
 
 print(decode_with_love('0906190699021906992109069920161508209924069913162306'))

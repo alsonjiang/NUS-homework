@@ -20,24 +20,22 @@ def decode_map(mapfile, ddict, outfile):
         f.write(decoded)
 
 
-def sliding_window():
-    pass
-
-
-
 def find_treasure(mapfile):
-    #height of map start from -4 to remove legends at bottom of map
-    height = -4
-    with open(mapfile, "r") as f:
-        return f.readline
-        length = f.readline
-        for lines in f:
-            height += 1
+    with open(mapfile, 'r') as f:
+        map_data = [list(line.strip()) for line in f]
 
+    rows, cols = len(map_data), len(map_data[0])
 
-    return length, height
-
-
+    for r in range(1, rows - 1):  # We start from 1 and end at rows - 1 to avoid index out of bounds
+        for c in range(1, cols - 1):
+            # Check for the tree pattern
+            if (map_data[r][c] == 'T' and
+                map_data[r - 1][c] == 'T' and
+                map_data[r + 1][c] == 'T' and
+                map_data[r][c - 1] == 'T' and
+                map_data[r][c + 1] == 'T'):
+                return (r, c)
+    return None  # If no treasure found
 
 
 d1 = {'D': 'W', '1': 'W', 'Z': 'W', 'C': 'T', '3': 'T', 'F': 'T', '0': '.', 
