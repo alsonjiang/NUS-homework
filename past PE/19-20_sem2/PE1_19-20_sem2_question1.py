@@ -9,16 +9,17 @@ def rotate(bouquet: tuple, step: int) -> tuple:
 def flower_I(bouquet: tuple, k: int) -> str:
     bouquet_lst = list(bouquet)
     flowers_gifted = bouquet_lst[k-1] #first rose, kth from start
+    bouquet_lst = rotate(bouquet_lst, k-1)
 
     for i in range(len(bouquet_lst)):
-        bouquet_lst = rotate(bouquet_lst, k-1)
+        bouquet_lst = rotate(bouquet_lst, k)
         print(bouquet_lst)
-        flowers_gifted += bouquet_lst[2]
+        flowers_gifted += bouquet_lst[3]
     
     return flowers_gifted
     
 print(flower_I(("R", "P", "W", "W", "P", "R", "R", "R"), 3))
-
+#W R R P P R W R
 
 def flower_R(bouquet: tuple, k: int) -> str:
     pass

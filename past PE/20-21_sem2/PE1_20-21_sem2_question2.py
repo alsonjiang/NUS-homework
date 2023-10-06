@@ -23,7 +23,7 @@ def rna_segment(rna: str) -> str:
             start_index.append(i)
         
         #either ends found
-        if window == end_1 or window == end_2:
+        elif window == end_1 or window == end_2:
             end_index.append(i)
     
     #FIRST occurence of starts and ends
@@ -32,7 +32,7 @@ def rna_segment(rna: str) -> str:
 
     return segmented
 
-#print(rna_segment('GUUGAAGUACAAAG'))
+print(rna_segment('GUUGAAGUACAAAG'))
 
 
 def poly_property(poly: str) -> str:
@@ -68,6 +68,6 @@ def poly_property(poly: str) -> str:
 
     return 'Neutral'
 
-#print(poly_property('YSF'))
+print(poly_property('YSF'))
 
 
