@@ -29,7 +29,7 @@ def find_treasure(mapfile):
     #height of map start from -4 to remove legends at bottom of map
     height = -4
     with open(mapfile, "r") as f:
-        return f.readline
+        
         length = f.readline
         for lines in f:
             height += 1

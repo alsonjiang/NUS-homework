@@ -1,4 +1,3 @@
-
 #Write a function decode(msg, offset) that will decode the message msg (str) 
 #knowing that the message is offset by offset (int).
 def decode(msg, offset):
@@ -60,7 +59,28 @@ def decode(msg, offset):
 
 #Write a function decode_with_love(msg) that will decode the message msg (str) 
 #without knowing the offset and return the decoded message with the word "LOVE" in it.
+#LOVE -> 11142104
 def decode_with_love(msg):
+    offset = 0
+    split_up_msg = ''
+    love = ['11','14','21','04']
+
+    while msg != '':
+        split_up_msg.append(int(msg[0:2]))
+        msg = msg[2:]
+
+    for i in range(26):
+        modified_msg = 
+        if love in modified_msg:
+            offset = i
+    return offset
+        
+
+print(decode_with_love('0906190699021906992109069920161508209924069913162306'))
+
+
+
+""" Failed code
 
     codes = {
     "0":"A",
@@ -131,6 +151,4 @@ def decode_with_love(msg):
     for item in split_up_msg:
         decoded_msg += codes.get(str(item))
 
-    return decoded_msg
-
-print(decode_with_love('0906190699021906992109069920161508209924069913162306'))
+    return decoded_msg"""

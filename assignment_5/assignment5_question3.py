@@ -37,6 +37,6 @@ def is_related(name1: str, name2: str, pdict: dict) -> bool:
   if pdict[name1] == pdict[name2]:
     return True
   
-  if name1 not in 
+
 
 print(is_related('Amy', 'Philip', parent))

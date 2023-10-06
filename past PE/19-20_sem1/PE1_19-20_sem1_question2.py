@@ -38,15 +38,10 @@ def is_unique(seq) -> bool:
 
 #not allowing len() and range()
 def is_unique_complicated(seq) -> bool:
-   for i in seq:
-       index_i = seq.index(i)
-       for j in seq:
-           index_j = seq.index(j)
+    for i, item1 in enumerate(seq):
+        for item2 in enumerate(seq):
+            if item1 == item2[1] and i != item2[0]:  # If items are the same and indices are different
+                return False
+    return True
 
-           if index_i == index_j:
-               continue
-           
-           elif i == j:
-               return False
-
-print(is_unique_complicated(['a','b',3,True,999,'a']))
+#print(is_unique_complicated(['a','b',3,True,999,'a']))
