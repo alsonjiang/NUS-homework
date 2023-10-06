@@ -1,3 +1,5 @@
+#incomplete cause not interested and it's optional
+
 import matplotlib.pyplot as plt
 
 #without n 

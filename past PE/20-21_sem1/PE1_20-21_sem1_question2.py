@@ -60,6 +60,7 @@ def decode(msg, offset):
 #Write a function decode_with_love(msg) that will decode the message msg (str) 
 #without knowing the offset and return the decoded message with the word "LOVE" in it.
 #LOVE -> 11142104
+
 def decode_with_love(msg):
     offset = 0
     split_up_msg = ''
