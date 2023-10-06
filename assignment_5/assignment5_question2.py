@@ -21,21 +21,8 @@ def decode_map(mapfile, ddict, outfile):
 
 
 def find_treasure(mapfile):
-<<<<<<< HEAD
-    #height of map start from -4 to remove legends at bottom of map
-    height = -4
-    with open(mapfile, "r") as f:
-        
-        length = f.readline
-        for lines in f:
-            height += 1
-
-
-    return length, height
-=======
     with open(mapfile, 'r') as f:
         map_data = [list(line.strip()) for line in f]
->>>>>>> f8fabc1ef68f68cbdf607887e756b6a6cd4d7416
 
     rows, cols = len(map_data), len(map_data[0])
 
