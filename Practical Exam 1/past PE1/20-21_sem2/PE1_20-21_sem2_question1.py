@@ -12,7 +12,7 @@ def dna_transcription_I(dna: str) -> str:
 
     return rna
 
-print(dna_transcription_I('AGCTGACGTA'))
+#print(dna_transcription_I('AGCTGACGTA'))
 
 #recursive
 def dna_transcription_R(dna: str) -> str:
@@ -30,6 +30,6 @@ def dna_transcription_R(dna: str) -> str:
         rna += pairs[dna[0]]
         return rna + dna_transcription_R(dna[1:])
 
-print(dna_transcription_R('AGCTGACGTA'))
+#print(dna_transcription_R('AGCTGACGTA'))
 
     
