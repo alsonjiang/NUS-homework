@@ -21,21 +21,26 @@ def decode_map(mapfile, ddict, outfile):
 
 
 def find_treasure(mapfile):
+    map_data = []
+    #open the map in read only
     with open(mapfile, 'r') as f:
-        map_data = [list(line.strip()) for line in f]
+        
+        for line in f:
+            map_data.append(line.strip())
+
+       #map_data = [list(line.strip()) for line in f]
 
     rows, cols = len(map_data), len(map_data[0])
 
-    for r in range(1, rows - 1):  # We start from 1 and end at rows - 1 to avoid index out of bounds
+    for r in range(1, rows - 1):  
         for c in range(1, cols - 1):
-            # Check for the tree pattern
             if (map_data[r][c] == 'T' and
                 map_data[r - 1][c] == 'T' and
                 map_data[r + 1][c] == 'T' and
                 map_data[r][c - 1] == 'T' and
                 map_data[r][c + 1] == 'T'):
                 return (r, c)
-    return None  # If no treasure found
+    return None  
 
 
 d1 = {'D': 'W', '1': 'W', 'Z': 'W', 'C': 'T', '3': 'T', 'F': 'T', '0': '.', 
