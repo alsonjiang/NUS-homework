@@ -21,17 +21,22 @@ def decode_map(mapfile, ddict, outfile):
 
 
 def find_treasure(mapfile):
+    #list to contain rows and cols of the map
     map_data = []
     #open the map in read only
     with open(mapfile, 'r') as f:
-        
+
         for line in f:
-            map_data.append(line.strip())
+            map_data.append(line.strip()) #.strip() to remove \n
 
-       #map_data = [list(line.strip()) for line in f]
-
+    #number of items in the list = rows
+    #number of items in each item = cols
     rows, cols = len(map_data), len(map_data[0])
 
+    #search for pattern 
+    #  T    ->         (0,-1) 
+    #T T T  -> (-1,0), (0,0), (1,0)
+    #  T    ->         (0,1)
     for r in range(1, rows - 1):  
         for c in range(1, cols - 1):
             if (map_data[r][c] == 'T' and

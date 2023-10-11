@@ -17,22 +17,20 @@ def is_ancestor(name1: str, name2: str, pdict: dict) -> bool:
       name2 = pdict[name2] #move up, define new child
 
   return False
-  
-#print(is_ancestor('Amy', 'Tom', parent))
 
+
+def generate_ancestors(name, pdict): #function to return list of ancestors' names
+  seen = []
+  while name in pdict:
+    seen.append(name)
+    name = pdict[name]
+  return seen
+  
 
 def is_related(name1: str, name2: str, pdict: dict) -> bool:
-
-  def generate_ancestors(name: pdict): #function to return list of ancestor names
-    seen = []
-    while name in pdict:
-      seen.append(name)
-      name = pdict[name]
-    return seen
-
   #check if both names have ancestor-descendent relationship
   if is_ancestor(name1, name2, pdict) or is_ancestor(name2, name1, pdict):
-    return True
+    return True 
 
   #check if both names are from the same generation
   ancestors_1 = generate_ancestors(name1, pdict)
