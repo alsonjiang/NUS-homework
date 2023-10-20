@@ -62,7 +62,8 @@ def sumMatrix(m1, m2):
     return output
 
 #matrix transpose
-
+def transpose(matrix):
+    return [[row[i] for row in matrix] for i in range(len(matrix[0]))]
 
 #matrix inverse
 
