@@ -66,6 +66,29 @@ def sumMatrix(m1, m2):
 
 #matrix inverse
 
+
+#determinant
+
+
+#minor
+#a minor of a matrix A is the determinant of some smaller square matrix
+
+
+#maze solving!!!
+#algorithm 1
+
+def possibleNeighbours(m, i, j):
+    h = len(m)
+    w = len(m[0])
+
+#how to check if maze is not solvable
+
+#algorithm 2
+#simplest / brute force -> store all possible routes in a collection then check which one has no blockage
+
+
+
+#=========================================================================================#
 #tic-tac-toe game
 # 1|2|3
 # 4|5|6  --> positions -> coordinates (i, j)
@@ -116,10 +139,18 @@ def circlePic():
     plt.imshow(pic)
     plt.show()
 
-circlePic()
+#circlePic()
 
 
 #reading csv files easier method, no need strip(), split(), etc
 #birth_file = open('(file_name)')
 #birth_file_reader = csv.reader(birth_file)
 #birth_data = list(birth_file_reader)
+
+lst1 = ['bc','de','ya','ab','bq','bd']
+lst2 = []
+for x in lst1:
+ lst2.append(tuple(x))
+d = dict(lst2)
+print(d['b'])
+print(lst2)

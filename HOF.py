@@ -72,3 +72,53 @@ def generate_random_4d_number():
      return int(random.random() * 10000)
 
 #print(generate_random_4d_number())
+
+#HOF Fib
+def fib(n):
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    return fib(n-1) + fib(n-2)
+
+def fib_gen(a, b):
+
+    def fib(n):
+        if n == 0:
+            return a
+        if n == 1:
+            return b
+        
+        vals = [a, b]
+
+        for _ in range(2, n+1):
+            vals.append(vals[-1] + vals[-2])
+        return vals[n]
+    return fib
+
+fib = fib_gen(0,1) #1st step -> compute gen
+#print(fib(10))
+
+
+def definite_integral(f, a, b, dx):
+    f(a + dx/2)*dx + f(a+dx+dx/2)*dx + ... + f(b-dx/2)*dx
+
+#print(definite_integral(lambda x: x**3, 0, 1, 0.01))
+
+
+#accumulator
+def sum(f,n):
+  res = 0
+  for i in range(n+1):
+    res += f(i)
+  return res
+
+def accumulate(f, op, init, n):
+    result = 0
+    for i in range(init, n+1):
+        pass
+
+def square_odd_terms(tpl):
+    return(tuple(map(lambda x: x**2 if x % 2 == 1 else x, tpl)))
+
+#print(square_odd_terms((1, 2, 3, 4, 5)))
