@@ -76,17 +76,129 @@ def transpose(matrix):
 
 
 #maze solving!!!
-#algorithm 1
+#BFS (breadth first search)
+from collections import deque
+import random
 
-def possibleNeighbours(m, i, j):
-    h = len(m)
-    w = len(m[0])
+def solve_maze(maze, start, end):
+    # The queue for the BFS algorithm
+    queue = deque([start])
+    # A dictionary to keep track of where we came from
+    came_from = {start: None}
+
+    while len(queue) > 0:
+        current = queue.popleft()
+
+        # If we've reached the end, we're done
+        if current == end:
+            break
+
+        # Get the neighbors of the current cell
+        neighbors = get_neighbors(maze, current)
+
+        for neighbor in neighbors:
+            if neighbor not in came_from:
+                queue.append(neighbor)
+                came_from[neighbor] = current
+
+    # If we didn't find the end, there's no solution
+    if end not in came_from:
+        return None
+
+    # Build the path from start to end
+    path = []
+    current = end
+    while current is not None:
+        path.append(current)
+        current = came_from[current]
+    path.reverse()
+
+    return path
+
+def get_neighbors(maze, cell):
+    # Returns the accessible neighbors of a cell in the maze
+    neighbors = []
+    for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+        new_x, new_y = cell[0] + dx, cell[1] + dy
+        if (0 <= new_x < len(maze)) and (0 <= new_y < len(maze[0])) and maze[new_x][new_y] != 'X':
+            neighbors.append((new_x, new_y))
+    return neighbors
+
+#create random maze 50/50 chance of blocked or path
+#blocked== 1, path == 0
+def createRandomMaze(n, m):
+    # Initialize an empty maze
+    maze = []
+    for _ in range(n):
+        row = []
+        for _ in range(m):
+            # For each cell, randomly choose between empty (0) and blocked (1)
+            cell = random.choice(['0', '1'])
+            row.append(cell)
+        maze.append(row)
+    return maze
+
+def mTightPrint(maze):
+    for row in maze:
+        print(''.join(row))
+
+new_maze = createRandomMaze(10,10)
+mTightPrint(new_maze)
+
+print(solve_maze(new_maze, (0,0), (9,9)))
+
+def possibleNeighbours(matrix, i, j):
+    height = len(matrix)
+    width = len(matrix[0])
+
+    allCandidates = [[i-1, j], [i+1, j], [i, j-1], [i, j+1]]
+    output = []
+    for candidates in allCandidates:
+        if 0 <= candidates[0] < height:
+            if 0 <= candidates[1] < width:
+                if matrix[candidates[0]][candidates[1]] != 1:
+                    output.append(candidates)
+    return output
+
+def isSolvable(maze):
+    if maze[0][0] == 1:
+        return False
+    visited = [[0,0]] #record those positions we visited before
+    S = [[0,0]] #all possible neighbours to try
+    while S:
+        position = S.pop()
+        if position[0] == (len(maze)-1) and position[1] == (len(maze[0]) - 1):
+            return True
+        possible_neighbours = possibleNeighbours(maze, position[0], position[1])
+        for new_position in possible_neighbours:
+            if new_position not in visited:
+                visited.append(new_position)
+                S.append(new_position)
+    
+    return False
+
 
 #how to check if maze is not solvable
 
 #algorithm 2
 #simplest / brute force -> store all possible routes in a collection then check which one has no blockage
 
+
+#queue based logic
+#how to get all binary numbers from 0 to n (example)
+def get_all_binary(n):
+    queue = [""]
+    for _ in range(n):
+        x = queue[0]
+        queue.remove(x)
+        y = x + '0'
+        queue.append(y)
+        z = x + '1'
+        queue.append(z)
+
+    return queue
+
+#print(get_all_binary(3))
 
 
 #=========================================================================================#
@@ -153,5 +265,5 @@ lst2 = []
 for x in lst1:
  lst2.append(tuple(x))
 d = dict(lst2)
-print(d['b'])
-print(lst2)
+#print(d['b'])
+#print(lst2)

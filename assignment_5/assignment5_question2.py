@@ -54,4 +54,4 @@ d1 = {'D': 'W', '1': 'W', 'Z': 'W', 'C': 'T', '3': 'T', 'F': 'T', '0': '.',
 '#': ' '}
 
 #decode_map("assignment_5/encoded_mapB.txt", d1, "assignment_5/decoded_mapB.txt")
-print(find_treasure("assignment_5/decoded_map.txt"))
+#print(find_treasure("assignment_5/decoded_map.txt"))
