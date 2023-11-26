@@ -27,3 +27,23 @@ if __name__ == '__main__':
 
     print(result)
     print(f"{end-start} seconds")
+
+
+#from lecture notes
+def fib_m(n, fib_answers = {}):
+
+    if n in fib_answers.keys():
+        return fib_answers[n]
+    
+    if n == 0:
+        answer = 0
+
+    elif n == 1:
+        answer = 1
+        
+    else:
+        answer = fib_m(n-1) + fib_m(n-2)
+
+    fib_answers[n] = answer
+    return answer
+
