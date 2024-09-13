@@ -21,7 +21,7 @@ k = np.array([
 if __name__ == '__main__':
 
     inverse, w_cap = grading(j, k)
-    print(np.shape(k))
+    #print(np.shape(k))
     print(inverse)
     #print(np.shape(w_cap))
-    #print(w_cap)
+    print(w_cap)

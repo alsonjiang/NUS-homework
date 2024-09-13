@@ -1,6 +1,6 @@
 """
+Some features are in the hundreds while others are very small
 Assuming the last column holds the responses, then the outlier of -13
 could be an issue for the model. This value should be marked as -1
-
 
 """
