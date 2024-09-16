@@ -9,7 +9,7 @@ x = np.array([[-10], [-8], [-3], [-1], [2], [8]])
 y = np.array([[5], [5], [4], [3], [2], [2]])
 
 # (a) Linear regression with a bias term (intercept)
-model_with_bias = LinearRegression(fit_intercept=True)
+model_with_bias = LinearRegression(fit_intercept=True) #auto bias adding and model fitting y=mx+c
 model_with_bias.fit(x, y)
 y_pred_with_bias = model_with_bias.predict(x)
 

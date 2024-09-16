@@ -2,6 +2,7 @@ import numpy as np
 from numpy.linalg import inv
 from A1_A0273348X import A1_A0273348X as grading
 
+
 j = np.array([
     [1, 1],
     [4, 2],
