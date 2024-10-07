@@ -14,7 +14,7 @@ def A2_A0273348X(N):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.8, random_state=N)
 
     #Generate the target output using one-hot encoding for both the training set and the test set
-    encoder = OneHotEncoder(sparse=False, sparse_output=False)
+    encoder = OneHotEncoder(sparse_output=False)
 
     #(number_of_training_samples,3)
     #identify and learn unique categories in y_train
