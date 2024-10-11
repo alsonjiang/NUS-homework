@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from numpy.linalg import inv
 from sklearn.metrics import mean_squared_error
-from sklearn.linear_model import LinearRegression #!!!
+from sklearn.linear_model import LinearRegression
 
 x = np.array([[-10], [-8], [-3], [-1], [2], [8]])
 y = np.array([[5], [5], [4], [3], [2], [2]])

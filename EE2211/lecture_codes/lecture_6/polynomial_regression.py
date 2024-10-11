@@ -5,6 +5,7 @@ from sklearn.preprocessing import PolynomialFeatures
 
 X = np.array([ [0, 0], [1, 1], [1, 0], [0, 1]]) #4x2
 y = np.array([[-1], [-1], [1], [1]]) #4x1
+
 ## Generate polynomial features
 order = 2
 poly = PolynomialFeatures(order)

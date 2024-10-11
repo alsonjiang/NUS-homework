@@ -1,12 +1,8 @@
-import numpy as np
-import pandas as pd
-from matplotlib import pyplot
-from sklearn.linear_model import LinearRegression
-
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split
 
 # Step 1: Load the dataset
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
@@ -19,10 +15,11 @@ y = wine['quality']
 X = wine.drop('quality', axis=1)
 
 # Split the data into training and testing sets
-X_train = X.iloc[:1500]
-X_test = X.iloc[1500:1599]
-y_train = y.iloc[:1500]
-y_test = y.iloc[1500:1599]
+train_X,test_X,train_y,test_y = train_test_split(X,y,test_size=99/1599, random_state = 0)
+X_train = X[0:1500]
+y_train = y[0:1500]
+X_test = X[1500:1599]
+y_test = y[1500:1599]
 
 # Step 3: Perform Linear Regression
 model = LinearRegression()
