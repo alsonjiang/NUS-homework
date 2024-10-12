@@ -5,14 +5,17 @@ from numpy.linalg import inv
 from sklearn.metrics import mean_squared_error
 
 #X = np.array([[1, -9], [1, -7], [1, -5], [1, 1], [1, 5], [1, 9]]) #6x2 overdetermined
-X = np.array([[50, 10], [40, 7], [65, 12], [70, 5], [75, 4]])
+#X = np.array([[50, 10], [40, 7], [65, 12], [70, 5], [75, 4]])
+X = np.array([[1, 1, 2], [1, 0, 6], [1, 1, 0], [1, 0, 5], [1, 1, 7]])
+
 #Y = np.array([[-6], [-6], [-4], [-1], [1], [4]]) #6x1
-Y = np.array([[9, 3], [6, 7], [5, 6], [3, 1], [2, 9]])
+#Y = np.array([[9, 3], [6, 7], [5, 6], [3, 1], [2, 9]])
+Y = np.array([[1], [2], [3], [4], [5]])
 
 w = inv(X.T @ X) @ X.T @ Y
 print(w)
 
-Xnew = np.array([62, 8]) #2
+Xnew = np.array([1, 1, 3]) #2
 Ynew = Xnew@w
 print(Ynew)
 
@@ -24,5 +27,8 @@ Ytest=X@w
 MSE = np.square(np.subtract(Ytest,Y)).mean() #formula?
 print(MSE)
 
-MSE = mean_squared_error(Ytest,Y) #built in function
-print(MSE)
+#MSE = mean_squared_error(Ytest,Y) #built in function
+#print(MSE)
+
+print("Predicted y for Xnew")
+print(Ynew)
